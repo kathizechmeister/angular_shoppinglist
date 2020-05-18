@@ -1,0 +1,73 @@
+
+<form  class="ui large form" [formGroup]="shoppinglistform" (ngSubmit)="submitForm()">
+    <span *ngIf="!authService.getCurrentUserIsHelper()">
+        <h1>Neue Einkaufsliste erstellen</h1>
+
+    <input type="hidden" formControlName="id">
+    <input type="hidden" formControlName="user_id" value={{this.authService.getCurrentUserId()}}>
+    <p>{{this.authService.getCurrentUserId()}}</p>
+    <div class="field">
+        <label>Einkaufslisten-Name</label>
+        <input formControlName="title">
+
+        <div *ngIf="errors.title" class="ui negative message"> {{ errors.title }} </div>
+    </div>
+
+    <div class="field">
+        <label>Deadline</label>
+        <input type="date" formControlName="deadline">
+        <div *ngIf="errors.deadline" class="ui negative message">{{ errors.deadline }}</div>
+    </div>
+    <div class="field">
+        <label>Gegenstände</label>
+        <div formArrayName="items">
+            <div class="fields" *ngFor="let control of items?.controls; index as i; last as l" [formGroupName]="i">
+                <input type="hidden" name="id">
+                <div class="six wide field">
+                    <input type="text" formControlName="description" placeholder="Gegenstand-Beschreibung">
+                </div>
+                <div class="two wide field">
+                    <input formControlName="amount" placeholder="Anzahl">
+                </div>
+                <div class="two wide field">
+                    <input formControlName="maxprice" placeholder="Maximaler Preis">
+                </div>
+                <div class="one wide field" *ngIf="l">
+                    <button (click)="addThumbnailControl()" class="ui large button" type="button">+</button>
+                </div>
+            </div>
+        </div>
+        <!--<label>Kommentare</label>
+        <div formArrayName="comments">
+            <div class="fields" *ngFor="let control of comments?.controls; index as c; last as l" [formGroupName]="c">
+                <input type="hidden" name="id">
+                <input type="hidden" name="shoppinglist_id" value={{this.shoppinglist.id}}>
+                <div class="twelve wide field">
+                    <input type="text" formControlName="commenttext" placeholder="Kommentartext">
+                </div>
+                <div class="one wide field" *ngIf="l">
+                    <button (click)="addThumbnailControlforComments()" class="ui large button" type="button">+</button>
+                </div>
+            </div>
+        </div>-->
+    </div>
+    </span>
+
+   <!-- <span *ngIf="authService.getCurrentUserIsHelper()">
+        <input type="hidden" formControlName="maybe_helper_id" value={{this.authService.getCurrentUserId()}}>
+    <div><input type="checkbox" formControlName="ishelper" id="helper">
+        <label for="helper">Diese Liste übernehmen?</label>
+    </div>
+
+    </span>-->
+    <button type="submit" class="ui button" [disabled]="shoppinglistform.invalid"> Speichern</button>
+</form>
+
+<!--<form  class="ui large form" [formGroup]="helperform" (ngSubmit)="submitHelperForm()">
+    <h1>Liste übernehmen?</h1>
+    <input type="hidden" formControlName="maybe_helper_id" value={{this.authService.getCurrentUserId()}}>
+    <div><input type="checkbox" formControlName="ishelper" id="helper">
+        <label for="helper">Diese Liste übernehmen?</label>
+    </div>
+    <button type="submit" class="ui button" [disabled]="helperform.invalid"> Speichern</button>
+</form>-->

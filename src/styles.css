@@ -1,1 +1,106 @@
 /* You can add global styles to this file, and also import other style files */
+body{
+    font-family: "Noto Sans";
+    padding: 0;
+    margin: 0;
+    color: #C69D97;
+}
+div{
+    padding: 20px;
+}
+h2{
+    font-size: 2em !important;
+}
+a{
+    text-decoration: none;
+    color: #636b6f!important;
+}
+a:hover{
+    text-decoration: none !important;
+    color: #636b6f !important;
+}
+
+
+.headOfAll{
+    background-color: #C69D97;
+    color: white;
+    height: 100px;
+
+}
+.contentOfAll{
+    margin-top: 100px;
+}
+.menu{
+    border-right: #636b6f 1px solid;
+    margin-top: 100px;
+    color: #C69D97;
+
+    position: fixed ;
+    overflow-x: hidden;
+}
+.menu a{
+    font-size: 1.5em;
+    color: #C69D97;
+    background-color: rgba(198,157,151,0.2);
+}
+.menu a:hover, .menu a.active{
+    color: #636b6f;
+}
+.bg-light-pink{
+    background-color: rgba(198,157,151,0.2);
+}
+
+.btn.btn-default {
+    background-color: #C69D97;
+    color: white !important;
+}
+.btn.btn-default:hover{
+    color: white;
+    -moz-box-shadow:    inset 0 0 5px #B6939A;
+    -webkit-box-shadow: inset 0 0 5px #B6939A;
+    box-shadow:         inset 0 0 5px #B6939A;
+}
+.btn.btn-default:focus{
+    color: white;
+    -moz-box-shadow:    inset 0 0 5px #636b6f;
+    -webkit-box-shadow: inset 0 0 5px #636b6f;
+    box-shadow:         inset 0 0 5px #636b6f;
+}
+.listdeadline{
+    color: #636b6f;
+    text-align: center;
+    vertical-align: center;
+}
+.listdeadlinedate{
+    font-size: 2em;
+    vertical-align: center;
+}
+
+.list-list:hover{
+    background-color: rgba(198,157,151,0.1);
+}
+
+.detailstable{
+
+}
+.big-text{
+    font-size: 1.5em;
+}
+.detailstext{
+    font-size: 1.5em;
+}
+.table-items div{
+    padding-top: 0px;
+    padding-bottom: 0px;
+    margin-top: 0;
+    margin-bottom: 0;
+
+}
+.table-items:hover{
+    background-color: rgba(198,157,151,0.1);
+    border-bottom: #eeeeee solid 0.5px;
+}
+
+.useridcomment{
+    color: #636b6f;
+}

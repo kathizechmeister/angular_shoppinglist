@@ -1,0 +1,95 @@
+<div  class="row">
+    <button [routerLink]="'/shoppinglists'" class="ui red btn  btn-default">
+        Zurück zur Übersicht
+    </button>
+    <span *ngIf="!shoppinglist?.helper_id">
+    <button *ngIf="!authService.getCurrentUserIsHelper()" [routerLink]= "['../../admin', shoppinglist?.id]" class="ui red btn  btn-default">
+        Einkaufsliste bearbeiten
+    </button>
+    </span>
+
+    <span *ngIf="!shoppinglist?.helper_id">
+        <button *ngIf="authService.getCurrentUserIsHelper()" (click)="accept(authService.getCurrentUserId())" class="ui red btn  btn-default">
+        Einkaufsliste übernehmen
+    </button>
+    </span>
+
+    <button *ngIf="!authService.getCurrentUserIsHelper()" class= "btn ui btn-default" (click)= "removeShoppinglist()" >
+     Liste löschen
+    </button >
+</div>
+<div class="list-details" *ngIf="shoppinglist">
+    <h2>{{shoppinglist?.title}}</h2>
+</div>
+<div class="row border-bottom">
+    <div class="col-lg-4 detailstable">
+        <p class="big-text"><b>Ersteller:</b></p>
+        <p class="detailstext">{{shoppinglist?.user?.firstname}} {{shoppinglist?.user?.lastname}}</p>
+    </div>
+    <div class="col-lg-4 detailstable">
+        <p class="big-text"><b>Deadline:</b></p>
+        <p class="detailstext" *ngIf="shoppinglist.deadline"> {{ shoppinglist?.deadline | date: 'longDate'}}</p>
+    </div>
+    <div class="col-lg-4 detailstable">
+        <p class="big-text"><b>Helfer:</b></p>
+        <p class="detailstext">
+           <span *ngIf="shoppinglist.helper_id"> {{ shoppinglist?.helper?.firstname }}
+               {{ shoppinglist?.helper?.lastname}}</span>
+            <span *ngIf="!shoppinglist.helper_id"> OFFEN</span>
+        </p>
+    </div>
+</div>
+
+<div class="row border-bottom">
+    <div class="col-lg-9">
+        <h3>Lieferadresse</h3>
+        <p>{{shoppinglist?.user?.street}} {{shoppinglist?.user?.streetnumber}}</p>
+        <p>{{shoppinglist?.user?.plz}} {{shoppinglist?.user?.city}}</p>
+    </div>
+    <div class="col-lg-3">
+        <a class="button btn" target="_blank" href="https://www.google.com/maps/dir/?api=1&destination={{shoppinglist?.user?.street}}+
+        {{shoppinglist?.user?.streetnumber}}+{{shoppinglist?.user?.plz}}+{{shoppinglist?.user?.city}}"
+       >Auf Maps ansehen</a>
+    </div>
+
+</div>
+<div class="row">
+    <div class="col-lg-12">
+        <h3><b>{{shoppinglist.items.length}}</b> Einkaufsgegenstände</h3>
+    </div>
+    <div class="col-lg-3"><h4>Bezeichung</h4></div>
+    <div class="col-lg-3"><h4>Menge</h4></div>
+    <div class="col-lg-3"><h4>Maximaler Preis</h4></div>
+</div>
+    <div class="row table-items" *ngFor="let item of shoppinglist.items; last as l">
+
+        <div class="col-lg-3" *ngIf="item?.description">{{item?.description }}</div>
+        <div class="col-lg-3" *ngIf="item?.amount">
+            <span *ngIf="item.amount"> {{item.amount }}</span>
+        </div>
+        <div class="col-lg-3" *ngIf="item?.maxprice">
+            <span *ngIf="item.maxprice"> {{item.maxprice }}€</span>
+        </div>
+</div>
+<div class="col-lg-12">
+    <h3>Kommentare</h3>
+</div>
+<div class="row comments" *ngFor="let comment of shoppinglist.comments; last as l">
+
+    <div class="col-lg-6" *ngIf="comment?.commenttext">{{comment?.commenttext }}</div>
+    <div class="col-lg-3 useridcomment" *ngIf="comment?.user_id">
+
+        von User
+    {{getCommentfirstname(comment.user_id)}}</div>
+    <div class="col-lg-1" >
+        <button class= "btn ui btn-default" (click)= "removeComment(comment?.id)" >
+            Kommentar löschen
+        </button >
+    </div>
+
+  <!--  <form class="col-lg-6" [formGroup]="commentform" (ngSubmit)="commentForm()">>
+        <input type="text" formControlName="commenttext" placeholder="Kommentar">
+        <button type="submit" class="ui button" [disabled]="commentform.invalid"> Speichern</button>
+    </form>-->
+
+</div>

@@ -1,0 +1,74 @@
+
+
+
+<div class= "ui middle aligned selection divided list" >
+   <span *ngIf="authService.isLoggedIn()">
+      <!------------------------------------------>
+
+
+      <!--IS HELPER-->
+      <span *ngIf="authService.getCurrentUserIsHelper()">
+         <span>
+            <h2>Hier sind deine übernommenen Listen</h2>
+            <span *ngFor="let shoppinglist of shoppinglists">
+               <span>
+                   <a *ngIf="shoppinglist?.helper_id == authService.getCurrentUserId()" class="item  bs-shoppinglist-list-item" [shoppinglist]= "shoppinglist" [routerLink]="shoppinglist.id" >
+            </a>
+
+               </span>
+
+            </span >
+         </span>
+         <hr>
+         <!----------------------------------------------------------->
+         <span >
+            <h2>Noch offene Listen</h2>
+            <span *ngFor="let shoppinglist of shoppinglists">
+            <a *ngIf="!shoppinglist?.helper_id" class="item  bs-shoppinglist-list-item"
+               [shoppinglist]= "shoppinglist" [routerLink]="shoppinglist.id" >
+            </a>
+            </span >
+
+         </span>
+
+      </span>
+      <!--IS NO HELPER-->
+      <span *ngIf="!authService.getCurrentUserIsHelper()">
+
+         <h2>DEINE EINKAUFSLISTEN</h2>
+         <span *ngFor="let shoppinglist of shoppinglists">
+             <a *ngIf="shoppinglist.user_id == authService.getCurrentUserId()" class="item bs-shoppinglist-list-item"
+                [shoppinglist]= "shoppinglist" [routerLink]="shoppinglist.id" ></a >
+         </span>
+
+   </span>
+   </span>
+
+
+   <span *ngIf="!authService.isLoggedIn()">
+      <!--IS HELPER-->
+      <!--IS NO HELPER-->
+      <h2>Um die Details der Einkaufslisten zu sehen, melde dich bitte an!</h2>
+         <a routerLink= "/login" routerLinkActive= "active" class= "item" >Login<br></a >
+         <span *ngFor="let shoppinglist of shoppinglists">
+             <a  class="item bs-shoppinglist-list-item" [shoppinglist]= "shoppinglist" ></a >
+         </span>
+<!---------------------------------------------->
+
+
+
+
+
+
+
+   </span>
+
+
+
+
+   <!--
+   <a *ngFor="let shoppinglist of shoppinglists" class="item bs-shoppinglist-list-item"
+       [shoppinglist]= "shoppinglist" [routerLink]="shoppinglist.id" ></a >
+
+   -->
+</div >

@@ -1,0 +1,26 @@
+
+<div class="list-list row">
+    <div class="col-lg-2 bg-light-pink">
+        <p *ngIf="shoppinglist.deadline" class="listdeadline">Deadline<br><b><span class="listdeadlinedate">{{ shoppinglist?.deadline | date: 'longDate'}}</span></b>
+        </p>
+
+    </div>
+    <div class="col-lg-8">
+        <h3>{{ shoppinglist.title }}</h3>
+        <p>Erstellt von {{shoppinglist?.user?.firstname}} {{shoppinglist?.user?.lastname}}</p>
+        <br>
+        <p *ngIf="shoppinglist.helper_id">
+                    Helfer gefunden!
+                    Danke <b>{{shoppinglist?.helper?.firstname}} {{shoppinglist?.helper?.lastname}}</b> für deine Hilfe!
+                </p>
+            <p *ngIf="!shoppinglist.helper_id">
+                    offen für Helfer
+                </p>
+
+    </div>
+    <div class="col-lg-2 bg-light-pink">
+        <p class="listdeadline">Gegenstände<br/><br><span class="listdeadlinedate"><b>{{shoppinglist.items?.length}}</b></span></p>
+        <p  class="listdeadline" *ngIf="!shoppinglist.helper_id">offen</p>
+    </div>
+
+</div>
